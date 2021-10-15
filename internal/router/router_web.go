@@ -1,6 +1,8 @@
 package router
 
 import (
+	"fmt"
+	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
 	"github.com/xinliangnote/go-gin-api/internal/web/controller/admin_handler"
 	"github.com/xinliangnote/go-gin-api/internal/web/controller/authorized_handler"
 	"github.com/xinliangnote/go-gin-api/internal/web/controller/config_handler"
@@ -31,6 +33,9 @@ func setWebRouter(r *resource) {
 	{
 		// 首页
 		notRBAC.GET("", indexHandler.View())
+		notRBAC.GET("/hello", func(c core.Context) {
+			fmt.Println("hello1")
+		})
 
 		// 仪表盘
 		notRBAC.GET("/dashboard", dashboardHandler.View())
