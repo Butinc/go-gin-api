@@ -1,14 +1,13 @@
 package router
 
 import (
-	"fmt"
-	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
 	"github.com/xinliangnote/go-gin-api/internal/web/controller/admin_handler"
 	"github.com/xinliangnote/go-gin-api/internal/web/controller/authorized_handler"
 	"github.com/xinliangnote/go-gin-api/internal/web/controller/config_handler"
 	"github.com/xinliangnote/go-gin-api/internal/web/controller/cron_handler"
 	"github.com/xinliangnote/go-gin-api/internal/web/controller/dashboard_handler"
 	"github.com/xinliangnote/go-gin-api/internal/web/controller/generator_handler"
+	hello_handler "github.com/xinliangnote/go-gin-api/internal/web/controller/hello"
 	"github.com/xinliangnote/go-gin-api/internal/web/controller/index_handler"
 	"github.com/xinliangnote/go-gin-api/internal/web/controller/install_handler"
 	"github.com/xinliangnote/go-gin-api/internal/web/controller/tool_handler"
@@ -19,6 +18,7 @@ func setWebRouter(r *resource) {
 
 	installHandler := install_handler.New(r.logger)
 	indexHandler := index_handler.New(r.logger, r.db, r.cache)
+	helloHandler := hello_handler.New(r.logger, r.db, r.cache)
 	dashboardHandler := dashboard_handler.New(r.logger, r.db, r.cache)
 	generatorHandler := generator_handler.New(r.logger, r.db, r.cache)
 	configInfoHandler := config_handler.New(r.logger, r.db, r.cache)
@@ -33,9 +33,7 @@ func setWebRouter(r *resource) {
 	{
 		// 首页
 		notRBAC.GET("", indexHandler.View())
-		notRBAC.GET("/hello", func(c core.Context) {
-			fmt.Println("hello1")
-		})
+		notRBAC.GET("/hello", helloHandler.View())
 
 		// 仪表盘
 		notRBAC.GET("/dashboard", dashboardHandler.View())
