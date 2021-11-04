@@ -48,6 +48,10 @@ func (h *handler) Execute() core.HandlerFunc {
 			"table_sql":      mysql_table.CreateAdminTableSql(),
 			"table_data_sql": mysql_table.CreateAdminTableDataSql(),
 		},
+		"department": {
+			"table_sql":      mysql_table.CreateDepartmentTableSql(),
+			"table_data_sql": mysql_table.CreateDepartmentTableDataSql(),
+		},
 		"admin_menu": {
 			"table_sql":      mysql_table.CreateAdminMenuTableSql(),
 			"table_data_sql": mysql_table.CreateAdminMenuTableDataSql(),

@@ -17,7 +17,7 @@ type upgradeViewData struct {
 	IsHave    int32  `json:"is_have"`    // 是否已存在 1=存在 -1=不存在
 }
 
-var tableList = []string{"authorized", "authorized_api", "admin", "menu", "menu_action", "admin_menu"}
+var tableList = []string{"authorized", "authorized_api", "admin", "department", "menu", "menu_action", "admin_menu"}
 
 func (h *handler) UpgradeView() core.HandlerFunc {
 	return func(c core.Context) {
