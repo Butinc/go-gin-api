@@ -75,6 +75,13 @@ func setWebRouter(r *resource) {
 		web.GET("/admin/menu_action/:id", adminHandler.MenuActionView())
 		web.GET("/admin/action/:id", adminHandler.AdminMenuView())
 
+		// 部门
+		web.GET("/department/list", adminHandler.ListView())
+		web.GET("/department/add", adminHandler.AddView())
+		web.GET("/department/menu", adminHandler.MenuView())
+		web.GET("/department/menu_action/:id", adminHandler.MenuActionView())
+		web.GET("/department/action/:id", adminHandler.AdminMenuView())
+
 		// 升级
 		web.GET("/upgrade", upgradeHandler.UpgradeView())
 		web.POST("/upgrade/execute", upgradeHandler.UpgradeExecute())
