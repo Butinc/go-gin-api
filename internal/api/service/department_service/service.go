@@ -12,7 +12,7 @@ var _ Service = (*service)(nil)
 type Service interface {
 	i()
 
-	// PageList Create(ctx core.Context, adminData *CreateAdminData) (id int32, err error)
+	Create(ctx core.Context, adminData *CreateDepartmentData) (id int32, err error)
 	PageList(ctx core.Context, searchData *SearchData) (listData []*department_repo.Department, err error)
 	PageListCount(ctx core.Context, searchData *SearchData) (total int64, err error)
 	/*UpdateUsed(ctx core.Context, id int32, used int32) (err error)

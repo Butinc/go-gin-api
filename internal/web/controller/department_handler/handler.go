@@ -13,7 +13,7 @@ var _ Handler = (*handler)(nil)
 type Handler interface {
 	i()
 
-	// ListView AddView() core.HandlerFunc
+	AddView() core.HandlerFunc
 	ListView() core.HandlerFunc
 	//LoginView() core.HandlerFunc
 	//ModifyPasswordView() core.HandlerFunc
