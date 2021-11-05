@@ -5,6 +5,7 @@ import (
 	"github.com/xinliangnote/go-gin-api/internal/api/controller/authorized_handler"
 	"github.com/xinliangnote/go-gin-api/internal/api/controller/config_handler"
 	"github.com/xinliangnote/go-gin-api/internal/api/controller/cron_handler"
+	"github.com/xinliangnote/go-gin-api/internal/api/controller/department_handler"
 	"github.com/xinliangnote/go-gin-api/internal/api/controller/menu_handler"
 	"github.com/xinliangnote/go-gin-api/internal/api/controller/tool_handler"
 	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
@@ -53,6 +54,10 @@ func setApiRouter(r *resource) {
 
 		api.POST("/admin/menu", adminHandler.CreateAdminMenu())
 		api.GET("/admin/menu/:id", core.AliasForRecordMetrics("/api/admin/menu"), adminHandler.ListAdminMenu())
+
+		// 部门
+		departmentHandler := department_handler.New(r.logger, r.db, r.cache)
+		api.GET("/department", departmentHandler.List())
 
 		// menu
 		menuHandler := menu_handler.New(r.logger, r.db, r.cache)

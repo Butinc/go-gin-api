@@ -98,37 +98,13 @@
                         });
 
                         $.each(data.list, function (index, value) {
-                            var showUsedBadge = "";
-                            var showOnlineBadge = "";
                             var optionUsedName = "";
-
-                            if (value.is_used === 1) {
-                                optionUsedName = '禁用';
-                                showUsedBadge = '<span class="badge badge-success">启用</span></td>'
-                            }
-
-                            if (value.is_used === -1) {
-                                optionUsedName = '启用';
-                                showUsedBadge = '<span class="badge badge-danger">禁用</span></td>'
-                            }
-
-                            if (value.is_online === 1) {
-                                showOnlineBadge = '<span class="badge btn-primary">在线</span></td>'
-                            }
-
-                            if (value.is_online === -1) {
-                                showOnlineBadge = '<span class="badge btn-secondary">离线</span></td>'
-                            }
 
                             const tr = '<tr>\n' +
                                 '<td>' + value.id + '</td>\n' +
-                                '<td>' + value.username + '</td>\n' +
-                                '<td>' + value.nickname + '</td>\n' +
-                                '<td>' + value.mobile + '</td>\n' +
+                                '<td>' + value.name + '</td>\n' +
                                 '<td>' + value.created_at + '</td>\n' +
                                 '<td>' + value.updated_at + '</td>\n' +
-                                '<td style="text-align: center; ">' + showUsedBadge + '</td>\n' +
-                                '<td style="text-align: center; ">' + showOnlineBadge + '</td>\n' +
                                 '<td style="text-align: center; ">\n' +
                                 '<div class="btn-group">\n' +
                                 '    <a class="btn btn-xs btn-default btn-option" href="#!" title=""\n' +

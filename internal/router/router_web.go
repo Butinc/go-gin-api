@@ -6,6 +6,7 @@ import (
 	"github.com/xinliangnote/go-gin-api/internal/web/controller/config_handler"
 	"github.com/xinliangnote/go-gin-api/internal/web/controller/cron_handler"
 	"github.com/xinliangnote/go-gin-api/internal/web/controller/dashboard_handler"
+	"github.com/xinliangnote/go-gin-api/internal/web/controller/department_handler"
 	"github.com/xinliangnote/go-gin-api/internal/web/controller/generator_handler"
 	hello_handler "github.com/xinliangnote/go-gin-api/internal/web/controller/hello"
 	"github.com/xinliangnote/go-gin-api/internal/web/controller/index_handler"
@@ -25,6 +26,7 @@ func setWebRouter(r *resource) {
 	authorizedHandler := authorized_handler.New(r.logger, r.db, r.cache)
 	toolHandler := tool_handler.New(r.logger, r.db, r.cache)
 	adminHandler := admin_handler.New(r.logger, r.db, r.cache)
+	departmentHandler := department_handler.New(r.logger, r.db, r.cache)
 	upgradeHandler := upgrade_handler.New(r.logger, r.db, r.cache)
 	cronTaskHandler := cron_handler.New(r.logger, r.db, r.cache)
 
@@ -76,11 +78,11 @@ func setWebRouter(r *resource) {
 		web.GET("/admin/action/:id", adminHandler.AdminMenuView())
 
 		// 部门
-		web.GET("/department/list", adminHandler.ListView())
-		web.GET("/department/add", adminHandler.AddView())
-		web.GET("/department/menu", adminHandler.MenuView())
-		web.GET("/department/menu_action/:id", adminHandler.MenuActionView())
-		web.GET("/department/action/:id", adminHandler.AdminMenuView())
+		web.GET("/department/list", departmentHandler.ListView())
+		/*web.GET("/department/add", departmentHandler.AddView())
+		web.GET("/department/menu", departmentHandler.MenuView())
+		web.GET("/department/menu_action/:id", departmentHandler.MenuActionView())
+		web.GET("/department/action/:id", departmentHandler.AdminMenuView())*/
 
 		// 升级
 		web.GET("/upgrade", upgradeHandler.UpgradeView())
