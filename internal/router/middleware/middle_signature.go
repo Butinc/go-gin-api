@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"fmt"
 	"net/http"
 	"strings"
 	"time"
@@ -108,6 +109,7 @@ func (m *middleware) Signature() core.HandlerFunc {
 		}
 
 		ok, err := signature.New(key, data.Secret, ttl).Verify(authorization, date, c.Path(), c.Method(), c.RequestInputParams())
+		fmt.Println(c.RequestInputParams())
 		if err != nil {
 			c.AbortWithError(errno.NewError(
 				http.StatusBadRequest,

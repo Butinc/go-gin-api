@@ -31,11 +31,6 @@ type Handler interface {
 	// @Router /api/admin/modify_password [patch]
 	ModifyPassword() core.HandlerFunc
 
-	// Detail 个人信息
-	// @Tags API.admin
-	// @Router /api/admin/info [get]
-	Detail() core.HandlerFunc
-
 	// ModifyPersonalInfo 修改个人信息
 	// @Tags API.admin
 	// @Router /api/admin/modify_personal_info [patch]
@@ -50,6 +45,11 @@ type Handler interface {
 	// @Tags API.department
 	// @Router /api/department [get]
 	List() core.HandlerFunc
+
+	// Detail 个人信息
+	// @Tags API.admin
+	// @Router /api/admin/info [get]
+	Detail() core.HandlerFunc
 
 	/*// Delete 删除管理员
 	// @Tags API.admin

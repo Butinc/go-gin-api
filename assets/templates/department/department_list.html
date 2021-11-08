@@ -107,19 +107,9 @@
                                 '<td>' + value.updated_at + '</td>\n' +
                                 '<td style="text-align: center; ">\n' +
                                 '<div class="btn-group">\n' +
-                                '    <a class="btn btn-xs btn-default btn-option" href="#!" title=""\n' +
-                                '                                           data-id="' + value.hashid + '"' +
-                                '                                           data-is-used="' + value.is_used + '"' +
-                                '                                           data-toggle="tooltip" data-original-title="' + optionUsedName + '">' + optionUsedName + '</a>\n' +
-                                '    <a class="btn btn-xs btn-default btn-resetPassword" href="#!" title=""\n' +
-                                '                                           data-id="' + value.hashid + '"' +
-                                '                                           data-toggle="tooltip" data-original-title="重置密码">重置密码</a>\n' +
-                                '    <a class="btn btn-xs btn-default btn-menu" href="#!" title=""\n' +
-                                '                                           data-id="' + value.hashid + '"' +
-                                '                                           data-toggle="tooltip" data-original-title="菜单授权">菜单授权</a>\n' +
                                 '    <a class="btn btn-xs btn-default btn-offline" href="#!" title=""\n' +
                                 '                                           data-id="' + value.hashid + '"' +
-                                '                                           data-toggle="tooltip" data-original-title="下线">下线</a>\n' +
+                                '                                           data-toggle="tooltip" data-original-title="编辑">编辑</a>\n' +
                                 '    <a class="btn btn-xs btn-default btn-confirm" href="#!" title=""\n' +
                                 '                                           data-id="' + value.hashid + '"' +
                                 '                                           data-toggle="tooltip" data-original-title="删除">删除</a>\n' +
@@ -141,130 +131,6 @@
 
             );
         }
-
-        // 启用/禁用
-        $(document).on('click', '.btn-option', function () {
-            const id = $(this).attr('data-id');
-            const isUsed = $(this).attr('data-is-used');
-
-            var tipMessage = "";
-            var wantUsed = 0;
-            if (isUsed === "1") { // 1=当前为启用状态，需要改成禁用
-                tipMessage = "禁用";
-                wantUsed = -1;
-            }
-            if (isUsed === "-1") { // -1=当前为禁用状态，需要改成启用
-                tipMessage = "启用";
-                wantUsed = 1;
-            }
-
-            const patchData = {
-                id: id,
-                used: wantUsed,
-            };
-
-            $.confirm({
-                title: '谨慎操作',
-                content: '确认要 <strong style="color: red">' + tipMessage + '</strong> 吗？',
-                icon: 'mdi mdi-alert',
-                animation: 'scale',
-                closeAnimation: 'zoom',
-                buttons: {
-                    okay: {
-                        text: '确认',
-                        keys: ['enter'],
-                        btnClass: 'btn-orange',
-                        action: function () {
-                            AjaxForm(
-                                "PATCH",
-                                "/api/admin/used",
-                                patchData,
-                                function () {},
-                                function (data) {
-                                    $.alert({
-                                        title: '操作成功',
-                                        icon: 'mdi mdi-check-decagram',
-                                        type: 'green',
-                                        content: '编号：' + data.id + ' 已' + tipMessage + '。',
-                                        buttons: {
-                                            okay: {
-                                                text: '关闭',
-                                                action: function () {
-                                                    location.reload();
-                                                }
-                                            }
-                                        }
-                                    });
-                                },
-                                function (response) {
-                                    AjaxError(response);
-                                }
-                            );
-                        }
-                    },
-                    cancel: {
-                        text: '取消',
-                        keys: ['ctrl', 'shift'],
-                    }
-                }
-            });
-        });
-
-        // 重置密码
-        $(document).on('click', '.btn-resetPassword', function () {
-            const id = $(this).attr('data-id');
-
-            $.confirm({
-                title: '谨慎操作',
-                content: '确认要 <strong style="color: red">重置密码</strong> 吗？' + '<hr>' + '重置后密码为：123456',
-                icon: 'mdi mdi-alert',
-                animation: 'scale',
-                closeAnimation: 'zoom',
-                buttons: {
-                    okay: {
-                        text: '确认',
-                        keys: ['enter'],
-                        btnClass: 'btn-orange',
-                        action: function () {
-                            AjaxForm(
-                                "PATCH",
-                                '/api/admin/reset_password/' + id,
-                                "",
-                                function () {},
-                                function (data) {
-                                    $.alert({
-                                        title: '操作成功',
-                                        icon: 'mdi mdi-check-decagram',
-                                        type: 'green',
-                                        content: '编号：' + data.id + ' 密码重置完成。',
-                                        buttons: {
-                                            okay: {
-                                                text: '关闭',
-                                                action: function () {
-                                                    location.reload();
-                                                }
-                                            }
-                                        }
-                                    });
-                                },
-                                function (response) {
-                                    AjaxError(response);
-                                }
-                            );
-                        }
-                    },
-                    cancel: {
-                        text: '取消',
-                        keys: ['ctrl', 'shift'],
-                    }
-                }
-            });
-        });
-
-        // 菜单授权
-        $(document).on('click', '.btn-menu', function () {
-            location.href = "/admin/action/" + $(this).attr('data-id');
-        });
 
         // 下线
         $(document).on('click', '.btn-offline', function () {

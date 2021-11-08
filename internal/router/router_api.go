@@ -59,6 +59,7 @@ func setApiRouter(r *resource) {
 		departmentHandler := department_handler.New(r.logger, r.db, r.cache)
 		api.GET("/department", departmentHandler.List())
 		api.POST("/department", departmentHandler.Create())
+		api.GET("/department/:id", core.AliasForRecordMetrics("/api/department"), departmentHandler.Detail())
 
 		// menu
 		menuHandler := menu_handler.New(r.logger, r.db, r.cache)
