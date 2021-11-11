@@ -68,6 +68,8 @@ const (
 	CronListError    = 20403
 	CronDetailError  = 20404
 	CronExecuteError = 20405
+
+	DepartmentModifyInfoError = 20406
 )
 
 func Text(code int) string {

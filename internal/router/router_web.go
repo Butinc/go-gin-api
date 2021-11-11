@@ -80,7 +80,7 @@ func setWebRouter(r *resource) {
 		// 部门
 		web.GET("/department/list", departmentHandler.ListView())
 		web.GET("/department/add", departmentHandler.AddView())
-		web.GET("/department/modify_info", departmentHandler.ModifyInfoView())
+		web.GET("/department/:id", departmentHandler.ModifyInfoView())
 		/*web.GET("/department/menu_action/:id", departmentHandler.MenuActionView())
 		web.GET("/department/action/:id", departmentHandler.AdminMenuView())*/
 

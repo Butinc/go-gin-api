@@ -107,7 +107,7 @@
                                 '<td>' + value.updated_at + '</td>\n' +
                                 '<td style="text-align: center; ">\n' +
                                 '<div class="btn-group">\n' +
-                                '    <a class="btn btn-xs btn-default btn-offline" href="#!" title=""\n' +
+                                '    <a class="btn btn-xs btn-default btn-offline" href="/department/' + value.hashid + '" title=""\n' +
                                 '                                           data-id="' + value.hashid + '"' +
                                 '                                           data-toggle="tooltip" data-original-title="编辑">编辑</a>\n' +
                                 '    <a class="btn btn-xs btn-default btn-confirm" href="#!" title=""\n' +
@@ -131,57 +131,6 @@
 
             );
         }
-
-        // 下线
-        $(document).on('click', '.btn-offline', function () {
-            const id = $(this).attr('data-id');
-
-            $.confirm({
-                title: '谨慎操作',
-                content: '确认要 <strong style="color: red">下线</strong> 吗？',
-                icon: 'mdi mdi-alert',
-                animation: 'scale',
-                closeAnimation: 'zoom',
-                buttons: {
-                    okay: {
-                        text: '确认',
-                        keys: ['enter'],
-                        btnClass: 'btn-orange',
-                        action: function () {
-                            AjaxForm(
-                                "PATCH",
-                                '/api/admin/offline',
-                                {id: id},
-                                function () {},
-                                function (data) {
-                                    $.alert({
-                                        title: '操作成功',
-                                        icon: 'mdi mdi-check-decagram',
-                                        type: 'green',
-                                        content: '编号：' + data.id + ' 已下线。',
-                                        buttons: {
-                                            okay: {
-                                                text: '关闭',
-                                                action: function () {
-                                                    location.reload();
-                                                }
-                                            }
-                                        }
-                                    });
-                                },
-                                function (response) {
-                                    AjaxError(response);
-                                }
-                            );
-                        }
-                    },
-                    cancel: {
-                        text: '取消',
-                        keys: ['ctrl', 'shift'],
-                    }
-                }
-            });
-        });
 
         // 删除
         $(document).on('click', '.btn-confirm', function () {

@@ -16,7 +16,7 @@ import (
 )
 
 type detailRequest struct {
-	Id int32 `uri:"id"`
+	Id string `uri:"id"`
 }
 type detailResponse struct {
 	Name string `json:"name"` // 用户名
@@ -44,8 +44,22 @@ func (h *handler) Detail() core.HandlerFunc {
 			)
 			return
 		}
+
+		ids, err := h.hashids.HashidsDecode(req.Id)
+		if err != nil {
+			c.AbortWithError(errno.NewError(
+				http.StatusBadRequest,
+				code.HashIdsDecodeError,
+				code.Text(code.HashIdsDecodeError)).WithErr(err),
+			)
+			return
+		}
+
+		id := int32(ids[0])
+
 		searchOneData := new(department_service.SearchOneData)
-		searchOneData.Id = req.Id
+		searchOneData.Id = id
+		searchOneData.Name = ""
 
 		info, err := h.departmentService.Detail(c, searchOneData)
 		if err != nil {

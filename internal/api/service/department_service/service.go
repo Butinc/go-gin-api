@@ -16,11 +16,11 @@ type Service interface {
 	PageList(ctx core.Context, searchData *SearchData) (listData []*department_repo.Department, err error)
 	PageListCount(ctx core.Context, searchData *SearchData) (total int64, err error)
 	Detail(ctx core.Context, searchOneData *SearchOneData) (info *department_repo.Department, err error)
+	ModifyDepartmentInfo(ctx core.Context, id int32, modifyData *ModifyData) (err error)
 	/*UpdateUsed(ctx core.Context, id int32, used int32) (err error)
 	Delete(ctx core.Context, id int32) (err error)
 	ResetPassword(ctx core.Context, id int32) (err error)
 	ModifyPassword(ctx core.Context, id int32, newPassword string) (err error)
-	ModifyPersonalInfo(ctx core.Context, id int32, modifyData *ModifyData) (err error)
 
 	CreateMenu(ctx core.Context, menuData *CreateMenuData) (err error)
 	ListMenu(ctx core.Context, searchData *SearchListMenuData) (menuData []ListMenuData, err error)

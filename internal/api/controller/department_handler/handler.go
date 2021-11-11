@@ -37,8 +37,8 @@ type Handler interface {
 	ModifyPersonalInfo() core.HandlerFunc*/
 
 	// Create 新增管理员
-	// @Tags API.admin
-	// @Router /api/admin [post]
+	// @Tags API.department
+	// @Router /api/department [post]
 	Create() core.HandlerFunc
 
 	// List 部门列表
@@ -47,19 +47,19 @@ type Handler interface {
 	List() core.HandlerFunc
 
 	// Detail 个人信息
-	// @Tags API.admin
-	// @Router /api/admin/info [get]
+	// @Tags API.department
+	// @Router /api/department/info [get]
 	Detail() core.HandlerFunc
+
+	// ModifyDepartmentInfo 修改部门信息
+	// @Tags API.department
+	// @Router /api/department/offline [patch]
+	ModifyDepartmentInfo() core.HandlerFunc
 
 	/*// Delete 删除管理员
 	// @Tags API.admin
 	// @Router /api/admin/{id} [delete]
 	Delete() core.HandlerFunc
-
-	// Offline 下线管理员
-	// @Tags API.admin
-	// @Router /api/admin/offline [patch]
-	Offline() core.HandlerFunc
 
 	// UpdateUsed 更新管理员为启用/禁用
 	// @Tags API.admin
