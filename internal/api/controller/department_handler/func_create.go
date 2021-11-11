@@ -48,8 +48,8 @@ func (h *handler) Create() core.HandlerFunc {
 		if err != nil {
 			c.AbortWithError(errno.NewError(
 				http.StatusBadRequest,
-				code.AdminCreateError,
-				code.Text(code.AdminCreateError)).WithErr(err),
+				code.DepartmentCreateError,
+				code.Text(code.DepartmentCreateError)).WithErr(err),
 			)
 			return
 		}

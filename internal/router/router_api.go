@@ -61,6 +61,7 @@ func setApiRouter(r *resource) {
 		api.POST("/department", departmentHandler.Create())
 		api.GET("/department/:id", core.AliasForRecordMetrics("/api/department"), departmentHandler.Detail())
 		api.PATCH("/department", departmentHandler.ModifyDepartmentInfo())
+		api.DELETE("/department/:id", core.AliasForRecordMetrics("/api/department"), departmentHandler.Delete())
 
 		// menu
 		menuHandler := menu_handler.New(r.logger, r.db, r.cache)

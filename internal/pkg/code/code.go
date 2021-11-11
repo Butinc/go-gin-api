@@ -70,6 +70,7 @@ const (
 	CronExecuteError = 20405
 
 	DepartmentModifyInfoError = 20406
+	DepartmentCreateError     = 20407
 )
 
 func Text(code int) string {

@@ -56,12 +56,12 @@ type Handler interface {
 	// @Router /api/department/offline [patch]
 	ModifyDepartmentInfo() core.HandlerFunc
 
-	/*// Delete 删除管理员
+	// Delete 删除管理员
 	// @Tags API.admin
 	// @Router /api/admin/{id} [delete]
 	Delete() core.HandlerFunc
 
-	// UpdateUsed 更新管理员为启用/禁用
+	/*// UpdateUsed 更新管理员为启用/禁用
 	// @Tags API.admin
 	// @Router /api/admin/used [patch]
 	UpdateUsed() core.HandlerFunc
