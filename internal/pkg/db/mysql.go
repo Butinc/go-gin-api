@@ -2,6 +2,11 @@ package db
 
 import (
 	"fmt"
+	"gopkg.in/natefinch/lumberjack.v2"
+	"gorm.io/gorm/logger"
+	"io"
+	"log"
+	"os"
 	"time"
 
 	"github.com/xinliangnote/go-gin-api/configs"
@@ -13,6 +18,9 @@ import (
 )
 
 var _ Repo = (*dbRepo)(nil)
+
+const logLevel = "info"
+const enableFileLog = true
 
 type Repo interface {
 	i()
@@ -71,6 +79,62 @@ func (d *dbRepo) DbWClose() error {
 	return sqlDB.Close()
 }
 
+type myLogger struct {
+	log.Logger
+}
+
+func NewMyLogger(out io.Writer, prefix string, flag int) *myLogger {
+	return &myLogger{out: out, prefix: prefix, flag: flag}
+}
+
+// 自定义 gorm Writer
+func getGormLogWriter() logger.Writer {
+	var writer io.Writer
+
+	// 是否启用日志文件
+	if enableFileLog {
+		// 自定义 Writer
+		writer = &lumberjack.Logger{
+			Filename: "./logs/gorm.log",
+			//MaxSize:    global.App.Config.Log.MaxSize,
+			//MaxBackups: global.App.Config.Log.MaxBackups,
+			//MaxAge:     global.App.Config.Log.MaxAge,
+			//Compress:   global.App.Config.Log.Compress,
+		}
+	} else {
+		// 默认 Writer
+		writer = os.Stdout
+	}
+	return log.New(writer, "\r\n", log.LstdFlags)
+}
+
+func (l *log.Logger) Printf(format string, v ...interface{}) {
+	l.Output(2, fmt.Sprintf(format, v...))
+	log.Logger{}
+}
+
+func getGormLogger() logger.Interface {
+	var logMode logger.LogLevel
+
+	switch logLevel {
+	case "silent":
+		logMode = logger.Silent
+	case "error":
+		logMode = logger.Error
+	case "warn":
+		logMode = logger.Warn
+	case "info":
+		logMode = logger.Info
+	default:
+		logMode = logger.Info
+	}
+
+	return logger.New(getGormLogWriter(), logger.Config{
+		SlowThreshold: 200 * time.Millisecond, // 慢 SQL 阈值
+		LogLevel:      logMode,                // 日志级别
+	})
+}
+
 func dbConnect(user, pass, addr, dbName string) (*gorm.DB, error) {
 	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?charset=utf8mb4&parseTime=%t&loc=%s",
 		user,
@@ -84,6 +148,7 @@ func dbConnect(user, pass, addr, dbName string) (*gorm.DB, error) {
 		NamingStrategy: schema.NamingStrategy{
 			SingularTable: true,
 		},
+		Logger: getGormLogger(),
 		//Logger: logger.Default.LogMode(logger.Info), // 日志配置
 	})
 
@@ -110,7 +175,10 @@ func dbConnect(user, pass, addr, dbName string) (*gorm.DB, error) {
 	sqlDB.SetConnMaxLifetime(time.Minute * cfg.ConnMaxLifeTime)
 
 	// 使用插件
-	db.Use(&TracePlugin{})
+	err = db.Use(&TracePlugin{})
+	if err != nil {
+		return nil, err
+	}
 
 	return db, nil
 }

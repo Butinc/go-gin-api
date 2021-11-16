@@ -1,6 +1,7 @@
 package logger
 
 import (
+	"go.uber.org/zap"
 	"testing"
 
 	"github.com/pkg/errors"
@@ -13,7 +14,12 @@ func TestJSONLogger(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer logger.Sync()
+	defer func(logger *zap.Logger) {
+		err := logger.Sync()
+		if err != nil {
+			t.Fatal(err)
+		}
+	}(logger)
 
 	err = errors.New("pkg error")
 	logger.Error("err occurs", WrapMeta(nil, NewMeta("para1", "value1"), NewMeta("para2", "value2"))...)
