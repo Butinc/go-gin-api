@@ -80,11 +80,15 @@ func (d *dbRepo) DbWClose() error {
 }
 
 type myLogger struct {
-	log.Logger
+	*log.Logger
 }
 
-func NewMyLogger(out io.Writer, prefix string, flag int) *myLogger {
-	return &myLogger{out: out, prefix: prefix, flag: flag}
+func (l *myLogger) Printf(format string, v ...interface{}) {
+	l.Output(2, fmt.Sprintf(format, v...))
+}
+
+func NewMyLogger(logger *log.Logger) *myLogger {
+	return &myLogger{Logger: logger}
 }
 
 // 自定义 gorm Writer
@@ -105,12 +109,7 @@ func getGormLogWriter() logger.Writer {
 		// 默认 Writer
 		writer = os.Stdout
 	}
-	return log.New(writer, "\r\n", log.LstdFlags)
-}
-
-func (l *log.Logger) Printf(format string, v ...interface{}) {
-	l.Output(2, fmt.Sprintf(format, v...))
-	log.Logger{}
+	return NewMyLogger(log.New(writer, "\r\n", log.LstdFlags))
 }
 
 func getGormLogger() logger.Interface {
