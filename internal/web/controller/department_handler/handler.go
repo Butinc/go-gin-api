@@ -19,11 +19,6 @@ type Handler interface {
 	AddView() core.HandlerFunc
 	ListView() core.HandlerFunc
 	ModifyInfoView() core.HandlerFunc
-	//LoginView() core.HandlerFunc
-	//ModifyPasswordView() core.HandlerFunc
-	//MenuView() core.HandlerFunc
-	//MenuActionView() core.HandlerFunc
-	//AdminMenuView() core.HandlerFunc
 }
 
 type handler struct {
