@@ -26,7 +26,7 @@ func setWebRouter(r *resource) {
 	authorizedHandler := authorized_handler.New(r.logger, r.db, r.cache)
 	toolHandler := tool_handler.New(r.logger, r.db, r.cache)
 	adminHandler := admin_handler.New(r.logger, r.db, r.cache)
-	departmentHandler := department_handler.New(r.logger, r.db, r.cache)
+	departmentHandler := department_handler.New(r.logger)
 	upgradeHandler := upgrade_handler.New(r.logger, r.db, r.cache)
 	cronTaskHandler := cron_handler.New(r.logger, r.db, r.cache)
 
@@ -81,8 +81,6 @@ func setWebRouter(r *resource) {
 		web.GET("/department/list", departmentHandler.ListView())
 		web.GET("/department/add", departmentHandler.AddView())
 		web.GET("/department/:id", departmentHandler.ModifyInfoView())
-		/*web.GET("/department/menu_action/:id", departmentHandler.MenuActionView())
-		web.GET("/department/action/:id", departmentHandler.AdminMenuView())*/
 
 		// 升级
 		web.GET("/upgrade", upgradeHandler.UpgradeView())
