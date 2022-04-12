@@ -30,7 +30,7 @@ func (s *service) PageList(ctx core.Context, searchData *SearchData) (listData [
 	qb.WhereIsDeleted(db_repo.EqualPredicate, -1)
 
 	if searchData.Name != "" {
-		qb.WhereName(db_repo.EqualPredicate, searchData.Name)
+		qb.WhereName(db_repo.LikePredicate, "%"+searchData.Name+"%")
 	}
 
 	listData, err = qb.
