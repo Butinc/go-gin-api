@@ -53,7 +53,7 @@ func (h *handler) List() core.HandlerFunc {
 	return func(c core.Context) {
 		req := new(listRequest)
 		res := new(listResponse)
-		if err := c.ShouldBindForm(req); err != nil {
+		if err := c.ShouldBindQuery(req); err != nil {
 			c.AbortWithError(errno.NewError(
 				http.StatusBadRequest,
 				code.ParamBindError,
