@@ -173,207 +173,35 @@ func (qb *departmentRepoQueryBuilder) WhereName(p db_repo.Predicate, value strin
 	return qb
 }
 
-func (qb *departmentRepoQueryBuilder) WhereUsernameIn(value []string) *departmentRepoQueryBuilder {
+func (qb *departmentRepoQueryBuilder) WhereNameIn(value []string) *departmentRepoQueryBuilder {
 	qb.where = append(qb.where, struct {
 		prefix string
 		value  interface{}
 	}{
-		fmt.Sprintf("%v %v ?", "username", "IN"),
+		fmt.Sprintf("%v %v ?", "name", "IN"),
 		value,
 	})
 	return qb
 }
 
-func (qb *departmentRepoQueryBuilder) WhereUsernameNotIn(value []string) *departmentRepoQueryBuilder {
+func (qb *departmentRepoQueryBuilder) WhereNameNotIn(value []string) *departmentRepoQueryBuilder {
 	qb.where = append(qb.where, struct {
 		prefix string
 		value  interface{}
 	}{
-		fmt.Sprintf("%v %v ?", "username", "NOT IN"),
+		fmt.Sprintf("%v %v ?", "name", "NOT IN"),
 		value,
 	})
 	return qb
 }
 
-func (qb *departmentRepoQueryBuilder) OrderByUsername(asc bool) *departmentRepoQueryBuilder {
+func (qb *departmentRepoQueryBuilder) OrderByName(asc bool) *departmentRepoQueryBuilder {
 	order := "DESC"
 	if asc {
 		order = "ASC"
 	}
 
-	qb.order = append(qb.order, "username "+order)
-	return qb
-}
-
-func (qb *departmentRepoQueryBuilder) WherePassword(p db_repo.Predicate, value string) *departmentRepoQueryBuilder {
-	qb.where = append(qb.where, struct {
-		prefix string
-		value  interface{}
-	}{
-		fmt.Sprintf("%v %v ?", "password", p),
-		value,
-	})
-	return qb
-}
-
-func (qb *departmentRepoQueryBuilder) WherePasswordIn(value []string) *departmentRepoQueryBuilder {
-	qb.where = append(qb.where, struct {
-		prefix string
-		value  interface{}
-	}{
-		fmt.Sprintf("%v %v ?", "password", "IN"),
-		value,
-	})
-	return qb
-}
-
-func (qb *departmentRepoQueryBuilder) WherePasswordNotIn(value []string) *departmentRepoQueryBuilder {
-	qb.where = append(qb.where, struct {
-		prefix string
-		value  interface{}
-	}{
-		fmt.Sprintf("%v %v ?", "password", "NOT IN"),
-		value,
-	})
-	return qb
-}
-
-func (qb *departmentRepoQueryBuilder) OrderByPassword(asc bool) *departmentRepoQueryBuilder {
-	order := "DESC"
-	if asc {
-		order = "ASC"
-	}
-
-	qb.order = append(qb.order, "password "+order)
-	return qb
-}
-
-func (qb *departmentRepoQueryBuilder) WhereNickname(p db_repo.Predicate, value string) *departmentRepoQueryBuilder {
-	qb.where = append(qb.where, struct {
-		prefix string
-		value  interface{}
-	}{
-		fmt.Sprintf("%v %v ?", "nickname", p),
-		value,
-	})
-	return qb
-}
-
-func (qb *departmentRepoQueryBuilder) WhereNicknameIn(value []string) *departmentRepoQueryBuilder {
-	qb.where = append(qb.where, struct {
-		prefix string
-		value  interface{}
-	}{
-		fmt.Sprintf("%v %v ?", "nickname", "IN"),
-		value,
-	})
-	return qb
-}
-
-func (qb *departmentRepoQueryBuilder) WhereNicknameNotIn(value []string) *departmentRepoQueryBuilder {
-	qb.where = append(qb.where, struct {
-		prefix string
-		value  interface{}
-	}{
-		fmt.Sprintf("%v %v ?", "nickname", "NOT IN"),
-		value,
-	})
-	return qb
-}
-
-func (qb *departmentRepoQueryBuilder) OrderByNickname(asc bool) *departmentRepoQueryBuilder {
-	order := "DESC"
-	if asc {
-		order = "ASC"
-	}
-
-	qb.order = append(qb.order, "nickname "+order)
-	return qb
-}
-
-func (qb *departmentRepoQueryBuilder) WhereMobile(p db_repo.Predicate, value string) *departmentRepoQueryBuilder {
-	qb.where = append(qb.where, struct {
-		prefix string
-		value  interface{}
-	}{
-		fmt.Sprintf("%v %v ?", "mobile", p),
-		value,
-	})
-	return qb
-}
-
-func (qb *departmentRepoQueryBuilder) WhereMobileIn(value []string) *departmentRepoQueryBuilder {
-	qb.where = append(qb.where, struct {
-		prefix string
-		value  interface{}
-	}{
-		fmt.Sprintf("%v %v ?", "mobile", "IN"),
-		value,
-	})
-	return qb
-}
-
-func (qb *departmentRepoQueryBuilder) WhereMobileNotIn(value []string) *departmentRepoQueryBuilder {
-	qb.where = append(qb.where, struct {
-		prefix string
-		value  interface{}
-	}{
-		fmt.Sprintf("%v %v ?", "mobile", "NOT IN"),
-		value,
-	})
-	return qb
-}
-
-func (qb *departmentRepoQueryBuilder) OrderByMobile(asc bool) *departmentRepoQueryBuilder {
-	order := "DESC"
-	if asc {
-		order = "ASC"
-	}
-
-	qb.order = append(qb.order, "mobile "+order)
-	return qb
-}
-
-func (qb *departmentRepoQueryBuilder) WhereIsUsed(p db_repo.Predicate, value int32) *departmentRepoQueryBuilder {
-	qb.where = append(qb.where, struct {
-		prefix string
-		value  interface{}
-	}{
-		fmt.Sprintf("%v %v ?", "is_used", p),
-		value,
-	})
-	return qb
-}
-
-func (qb *departmentRepoQueryBuilder) WhereIsUsedIn(value []int32) *departmentRepoQueryBuilder {
-	qb.where = append(qb.where, struct {
-		prefix string
-		value  interface{}
-	}{
-		fmt.Sprintf("%v %v ?", "is_used", "IN"),
-		value,
-	})
-	return qb
-}
-
-func (qb *departmentRepoQueryBuilder) WhereIsUsedNotIn(value []int32) *departmentRepoQueryBuilder {
-	qb.where = append(qb.where, struct {
-		prefix string
-		value  interface{}
-	}{
-		fmt.Sprintf("%v %v ?", "is_used", "NOT IN"),
-		value,
-	})
-	return qb
-}
-
-func (qb *departmentRepoQueryBuilder) OrderByIsUsed(asc bool) *departmentRepoQueryBuilder {
-	order := "DESC"
-	if asc {
-		order = "ASC"
-	}
-
-	qb.order = append(qb.order, "is_used "+order)
+	qb.order = append(qb.order, "name "+order)
 	return qb
 }
 
