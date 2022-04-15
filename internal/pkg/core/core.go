@@ -251,7 +251,7 @@ func New(logger *zap.Logger, options ...Option) (Mux, error) {
 		engine: gin.New(),
 	}
 
-	fmt.Println(color.Blue(_UI))
+	//fmt.Println(color.Blue(_UI))
 	fmt.Println(color.Green(fmt.Sprintf("* [register port %s]", configs.ProjectPort)))
 	fmt.Println(color.Green(fmt.Sprintf("* [register env %s]", env.Active().Value())))
 

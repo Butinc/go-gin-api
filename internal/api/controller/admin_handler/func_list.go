@@ -23,17 +23,18 @@ type listRequest struct {
 }
 
 type listData struct {
-	Id          int    `json:"id"`           // ID
-	HashID      string `json:"hashid"`       // hashid
-	Username    string `json:"username"`     // 用户名
-	Nickname    string `json:"nickname"`     // 昵称
-	Mobile      string `json:"mobile"`       // 手机号
-	IsUsed      int    `json:"is_used"`      // 是否启用 1:是 -1:否
-	IsOnline    int    `json:"is_online"`    // 是否在线 1:是 -1:否
-	CreatedAt   string `json:"created_at"`   // 创建时间
-	CreatedUser string `json:"created_user"` // 创建人
-	UpdatedAt   string `json:"updated_at"`   // 更新时间
-	UpdatedUser string `json:"updated_user"` // 更新人
+	Id             int    `json:"id"`              // ID
+	HashID         string `json:"hashid"`          // hashid
+	Username       string `json:"username"`        // 用户名
+	Nickname       string `json:"nickname"`        // 昵称
+	Mobile         string `json:"mobile"`          // 手机号
+	IsUsed         int    `json:"is_used"`         // 是否启用 1:是 -1:否
+	IsOnline       int    `json:"is_online"`       // 是否在线 1:是 -1:否
+	CreatedAt      string `json:"created_at"`      // 创建时间
+	CreatedUser    string `json:"created_user"`    // 创建人
+	UpdatedAt      string `json:"updated_at"`      // 更新时间
+	UpdatedUser    string `json:"updated_user"`    // 更新人
+	DepartmentName string `json:"department_name"` // 部门名称
 }
 
 type listResponse struct {

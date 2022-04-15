@@ -12,8 +12,9 @@ import (
 )
 
 type modifyPersonalInfoRequest struct {
-	Nickname string `form:"nickname"` // 昵称
-	Mobile   string `form:"mobile"`   // 手机号
+	Nickname     string `form:"nickname"`      // 昵称
+	Mobile       string `form:"mobile"`        // 手机号
+	DepartmentId int    `form:"department_id"` // 部门id
 }
 
 type modifyPersonalInfoResponse struct {
@@ -49,6 +50,7 @@ func (h *handler) ModifyPersonalInfo() core.HandlerFunc {
 		modifyData := new(admin_service.ModifyData)
 		modifyData.Nickname = req.Nickname
 		modifyData.Mobile = req.Mobile
+		modifyData.DepartmentId = req.DepartmentId
 
 		if err := h.adminService.ModifyPersonalInfo(c, userId, modifyData); err != nil {
 			c.AbortWithError(errno.NewError(

@@ -1,9 +1,9 @@
 package department_handler
 
 import (
-	"github.com/xinliangnote/go-gin-api/internal/api/service/department_service"
 	"net/http"
 
+	"github.com/xinliangnote/go-gin-api/internal/api/service/department_service"
 	"github.com/xinliangnote/go-gin-api/internal/pkg/code"
 	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
 	"github.com/xinliangnote/go-gin-api/internal/pkg/validation"
