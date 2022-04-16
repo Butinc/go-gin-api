@@ -15,7 +15,7 @@ import (
 type listRequest struct {
 	Page     int    `form:"page"`      // 第几页
 	PageSize int    `form:"page_size"` // 每页显示条数
-	name     string `form:"name"`      // 名称
+	Name     string `form:"name"`      // 名称
 }
 
 type listData struct {
@@ -53,7 +53,7 @@ func (h *handler) List() core.HandlerFunc {
 	return func(c core.Context) {
 		req := new(listRequest)
 		res := new(listResponse)
-		if err := c.ShouldBindForm(req); err != nil {
+		if err := c.ShouldBindQuery(req); err != nil {
 			c.AbortWithError(errno.NewError(
 				http.StatusBadRequest,
 				code.ParamBindError,
@@ -75,7 +75,7 @@ func (h *handler) List() core.HandlerFunc {
 		searchData := new(department_service.SearchData)
 		searchData.Page = page
 		searchData.PageSize = pageSize
-		searchData.Name = req.name
+		searchData.Name = req.Name
 
 		resListData, err := h.departmentService.PageList(c, searchData)
 		if err != nil {

@@ -7,15 +7,17 @@ import (
 )
 
 type ModifyData struct {
-	Nickname string // 昵称
-	Mobile   string // 手机号
+	Nickname     string // 昵称
+	Mobile       string // 手机号
+	DepartmentId int    // 部门id
 }
 
 func (s *service) ModifyPersonalInfo(ctx core.Context, id int32, modifyData *ModifyData) (err error) {
 	data := map[string]interface{}{
-		"nickname":     modifyData.Nickname,
-		"mobile":       modifyData.Mobile,
-		"updated_user": ctx.UserName(),
+		"nickname":      modifyData.Nickname,
+		"mobile":        modifyData.Mobile,
+		"department_id": modifyData.DepartmentId,
+		"updated_user":  ctx.UserName(),
 	}
 
 	qb := admin_repo.NewQueryBuilder()

@@ -29,6 +29,7 @@ func (s *service) PageList(ctx core.Context, searchData *SearchData) (listData [
 	offset := (page - 1) * pageSize
 
 	qb := admin_repo.NewQueryBuilder()
+	qb.Joins("left join department on admin.department_id = department.id")
 	qb.WhereIsDeleted(db_repo.EqualPredicate, -1)
 
 	if searchData.Username != "" {

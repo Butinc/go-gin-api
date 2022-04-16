@@ -162,6 +162,49 @@ func (qb *adminRepoQueryBuilder) OrderById(asc bool) *adminRepoQueryBuilder {
 	return qb
 }
 
+func (qb *adminRepoQueryBuilder) WhereDepartmentId(p db_repo.Predicate, value int32) *adminRepoQueryBuilder {
+	qb.where = append(qb.where, struct {
+		prefix string
+		value  interface{}
+	}{
+		fmt.Sprintf("%v %v ?", "department_id", p),
+		value,
+	})
+	return qb
+}
+
+func (qb *adminRepoQueryBuilder) WhereDepartmentIdIn(value []int32) *adminRepoQueryBuilder {
+	qb.where = append(qb.where, struct {
+		prefix string
+		value  interface{}
+	}{
+		fmt.Sprintf("%v %v ?", "department_id", "IN"),
+		value,
+	})
+	return qb
+}
+
+func (qb *adminRepoQueryBuilder) WhereDepartmentIdNotIn(value []int32) *adminRepoQueryBuilder {
+	qb.where = append(qb.where, struct {
+		prefix string
+		value  interface{}
+	}{
+		fmt.Sprintf("%v %v ?", "department_id", "NOT IN"),
+		value,
+	})
+	return qb
+}
+
+func (qb *adminRepoQueryBuilder) OrderByDepartmentId(asc bool) *adminRepoQueryBuilder {
+	order := "DESC"
+	if asc {
+		order = "ASC"
+	}
+
+	qb.order = append(qb.order, "department_id "+order)
+	return qb
+}
+
 func (qb *adminRepoQueryBuilder) WhereUsername(p db_repo.Predicate, value string) *adminRepoQueryBuilder {
 	qb.where = append(qb.where, struct {
 		prefix string
