@@ -1,10 +1,10 @@
 package logger
 
 import (
-	"go.uber.org/zap"
 	"testing"
 
 	"github.com/pkg/errors"
+	"go.uber.org/zap"
 )
 
 func TestJSONLogger(t *testing.T) {
@@ -36,6 +36,11 @@ func BenchmarkJsonLogger(b *testing.B) {
 		b.Fatal(err)
 	}
 
-	defer logger.Sync()
+	defer func(logger *zap.Logger) {
+		err := logger.Sync()
+		if err != nil {
+			b.Fatal(err)
+		}
+	}(logger)
 
 }

@@ -4,7 +4,7 @@
 | 序号 | 名称 | 描述 | 类型 | 键 | 为空 | 额外 | 默认值 |
 | :--: | :--: | :--: | :--: | :--: | :--: | :--: | :--: |
 | 1 | id | 主键 | int(11) unsigned | PRI | NO | auto_increment |  |
-| 2 | department_id | 部门ID | int(11) unsigned |  | YES |  | 0 |
+| 2 | department_id | 部门ID | int(11) unsigned |  | NO |  | 0 |
 | 3 | username | 用户名 | varchar(32) | UNI | NO |  |  |
 | 4 | password | 密码 | varchar(100) |  | NO |  |  |
 | 5 | nickname | 昵称 | varchar(60) |  | NO |  |  |

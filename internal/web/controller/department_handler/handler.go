@@ -2,6 +2,7 @@ package department_handler
 
 import (
 	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
+
 	"go.uber.org/zap"
 )
 

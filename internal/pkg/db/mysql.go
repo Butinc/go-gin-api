@@ -2,8 +2,6 @@ package db
 
 import (
 	"fmt"
-	"gopkg.in/natefinch/lumberjack.v2"
-	"gorm.io/gorm/logger"
 	"io"
 	"log"
 	"os"
@@ -12,8 +10,10 @@ import (
 	"github.com/xinliangnote/go-gin-api/configs"
 	"github.com/xinliangnote/go-gin-api/pkg/errors"
 
+	"gopkg.in/natefinch/lumberjack.v2"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
 )
 
@@ -84,7 +84,10 @@ type myLogger struct {
 }
 
 func (l *myLogger) Printf(format string, v ...interface{}) {
-	l.Output(2, fmt.Sprintf(format, v...))
+	err := l.Output(2, fmt.Sprintf(format, v...))
+	if err != nil {
+		return
+	}
 }
 
 func NewMyLogger(logger *log.Logger) *myLogger {

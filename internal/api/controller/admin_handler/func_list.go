@@ -1,10 +1,10 @@
 package admin_handler
 
 import (
-	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/department_repo"
 	"net/http"
 
 	"github.com/xinliangnote/go-gin-api/configs"
+	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/department_repo"
 	"github.com/xinliangnote/go-gin-api/internal/api/service/admin_service"
 	"github.com/xinliangnote/go-gin-api/internal/pkg/code"
 	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
