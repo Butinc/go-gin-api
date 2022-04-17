@@ -1,6 +1,9 @@
 package department_repo
 
-import "time"
+import (
+	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/admin_repo"
+	"time"
+)
 
 // Department 部门表
 //go:generate gormgen -structs Department -input .
@@ -12,4 +15,5 @@ type Department struct {
 	CreatedUser string    // 创建人
 	UpdatedAt   time.Time `gorm:"time"` // 更新时间
 	UpdatedUser string    // 更新人
+	Admins      []admin_repo.Admin
 }

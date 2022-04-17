@@ -1,6 +1,7 @@
 package department_handler
 
 import (
+	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/admin_repo"
 	"net/http"
 
 	"github.com/xinliangnote/go-gin-api/internal/api/service/department_service"
@@ -26,6 +27,7 @@ type listData struct {
 	CreatedUser string `json:"created_user"` // 创建人
 	UpdatedAt   string `json:"updated_at"`   // 更新时间
 	UpdatedUser string `json:"updated_user"` // 更新人
+	Admins      []admin_repo.Admin
 }
 
 type listResponse struct {
@@ -120,6 +122,7 @@ func (h *handler) List() core.HandlerFunc {
 				CreatedUser: v.CreatedUser,
 				UpdatedAt:   v.UpdatedAt.Format(time_parse.CSTLayout),
 				UpdatedUser: v.UpdatedUser,
+				Admins:      v.Admins,
 			}
 
 			res.List[k] = data
