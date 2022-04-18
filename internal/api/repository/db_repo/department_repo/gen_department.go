@@ -7,6 +7,7 @@ package department_repo
 
 import (
 	"fmt"
+	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/related_repo"
 	"time"
 
 	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo"
@@ -94,7 +95,7 @@ func (qb *departmentRepoQueryBuilder) First(db *gorm.DB) (*Department, error) {
 	return ret, res.Error
 }
 
-func (qb *departmentRepoQueryBuilder) QueryOne(db *gorm.DB) (*Department, error) {
+func (qb *departmentRepoQueryBuilder) QueryOne(db *gorm.DB) (*related_repo.DepartmentWithAdmins, error) {
 	qb.limit = 1
 	ret, err := qb.QueryAll(db)
 	if len(ret) > 0 {
@@ -103,8 +104,8 @@ func (qb *departmentRepoQueryBuilder) QueryOne(db *gorm.DB) (*Department, error)
 	return nil, err
 }
 
-func (qb *departmentRepoQueryBuilder) QueryAll(db *gorm.DB) ([]*Department, error) {
-	var ret []*Department
+func (qb *departmentRepoQueryBuilder) QueryAll(db *gorm.DB) ([]*related_repo.DepartmentWithAdmins, error) {
+	var ret []*related_repo.DepartmentWithAdmins
 	err := qb.buildQuery(db).Find(&ret).Error
 	return ret, err
 }

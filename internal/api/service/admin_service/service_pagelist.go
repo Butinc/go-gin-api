@@ -3,6 +3,7 @@ package admin_service
 import (
 	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo"
 	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/admin_repo"
+	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/related_repo"
 	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
 )
 
@@ -14,7 +15,7 @@ type SearchData struct {
 	Mobile   string // 手机号
 }
 
-func (s *service) PageList(ctx core.Context, searchData *SearchData) (listData []*admin_repo.Admin, err error) {
+func (s *service) PageList(ctx core.Context, searchData *SearchData) (listData []*related_repo.AdminWithDepartment, err error) {
 
 	page := searchData.Page
 	if page == 0 {

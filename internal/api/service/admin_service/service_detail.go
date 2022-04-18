@@ -3,6 +3,7 @@ package admin_service
 import (
 	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo"
 	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/admin_repo"
+	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/related_repo"
 	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
 )
 
@@ -15,7 +16,7 @@ type SearchOneData struct {
 	IsUsed   int32  // 是否启用 1:是  -1:否
 }
 
-func (s *service) Detail(ctx core.Context, searchOneData *SearchOneData) (info *admin_repo.Admin, err error) {
+func (s *service) Detail(ctx core.Context, searchOneData *SearchOneData) (info *related_repo.AdminWithDepartment, err error) {
 
 	qb := admin_repo.NewQueryBuilder()
 	qb.WhereIsDeleted(db_repo.EqualPredicate, -1)

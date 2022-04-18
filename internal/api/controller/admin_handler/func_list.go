@@ -1,10 +1,11 @@
 package admin_handler
 
 import (
+	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/department_repo"
+	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/related_repo"
 	"net/http"
 
 	"github.com/xinliangnote/go-gin-api/configs"
-	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/department_repo"
 	"github.com/xinliangnote/go-gin-api/internal/api/service/admin_service"
 	"github.com/xinliangnote/go-gin-api/internal/pkg/code"
 	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
@@ -35,7 +36,7 @@ type listData struct {
 	CreatedUser string                     `json:"created_user"` // 创建人
 	UpdatedAt   string                     `json:"updated_at"`   // 更新时间
 	UpdatedUser string                     `json:"updated_user"` // 更新人
-	Department  department_repo.Department `json:"department"`   // 部门
+	Department  related_repo. `json:"department"`   // 部门
 }
 
 type listResponse struct {

@@ -1,7 +1,7 @@
 package department_service
 
 import (
-	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/department_repo"
+	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/related_repo"
 	"github.com/xinliangnote/go-gin-api/internal/pkg/cache"
 	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
 	"github.com/xinliangnote/go-gin-api/internal/pkg/db"
@@ -13,9 +13,9 @@ type Service interface {
 	i()
 
 	Create(ctx core.Context, adminData *CreateDepartmentData) (id int32, err error)
-	PageList(ctx core.Context, searchData *SearchData) (listData []*department_repo.Department, err error)
+	PageList(ctx core.Context, searchData *SearchData) (listData []*related_repo.DepartmentWithAdmins, err error)
 	PageListCount(ctx core.Context, searchData *SearchData) (total int64, err error)
-	Detail(ctx core.Context, searchOneData *SearchOneData) (info *department_repo.Department, err error)
+	Detail(ctx core.Context, searchOneData *SearchOneData) (info *related_repo.DepartmentWithAdmins, err error)
 	ModifyDepartmentInfo(ctx core.Context, id int32, modifyData *ModifyData) (err error)
 	Delete(ctx core.Context, id int32) (err error)
 }
