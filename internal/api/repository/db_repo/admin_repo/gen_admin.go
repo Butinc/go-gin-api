@@ -7,7 +7,6 @@ package admin_repo
 
 import (
 	"fmt"
-	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/related_repo"
 	"time"
 
 	"github.com/pkg/errors"
@@ -94,7 +93,7 @@ func (qb *adminRepoQueryBuilder) First(db *gorm.DB) (*Admin, error) {
 	return ret, res.Error
 }
 
-func (qb *adminRepoQueryBuilder) QueryOne(db *gorm.DB) (*related_repo.AdminWithDepartment, error) {
+func (qb *adminRepoQueryBuilder) QueryOne(db *gorm.DB) (*Admin, error) {
 	qb.limit = 1
 	ret, err := qb.QueryAll(db)
 	if len(ret) > 0 {
@@ -103,8 +102,8 @@ func (qb *adminRepoQueryBuilder) QueryOne(db *gorm.DB) (*related_repo.AdminWithD
 	return nil, err
 }
 
-func (qb *adminRepoQueryBuilder) QueryAll(db *gorm.DB) ([]*related_repo.AdminWithDepartment, error) {
-	var ret []*related_repo.AdminWithDepartment
+func (qb *adminRepoQueryBuilder) QueryAll(db *gorm.DB) ([]*Admin, error) {
+	var ret []*Admin
 	err := qb.buildQuery(db).Find(&ret).Error
 	return ret, err
 }

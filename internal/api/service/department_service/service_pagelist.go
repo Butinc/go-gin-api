@@ -2,8 +2,7 @@ package department_service
 
 import (
 	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo"
-	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/department_repo"
-	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/related_repo"
+	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/admin_repo"
 	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
 )
 
@@ -13,7 +12,7 @@ type SearchData struct {
 	Name     string // 用户名
 }
 
-func (s *service) PageList(ctx core.Context, searchData *SearchData) (listData []*related_repo.DepartmentWithAdmins, err error) {
+func (s *service) PageList(ctx core.Context, searchData *SearchData) (listData []*admin_repo.Department, err error) {
 
 	page := searchData.Page
 	if page == 0 {
@@ -27,7 +26,7 @@ func (s *service) PageList(ctx core.Context, searchData *SearchData) (listData [
 
 	offset := (page - 1) * pageSize
 
-	qb := department_repo.NewQueryBuilder()
+	qb := admin_repo.NewDepartmentQueryBuilder()
 	qb.WhereIsDeleted(db_repo.EqualPredicate, -1)
 
 	if searchData.Name != "" {

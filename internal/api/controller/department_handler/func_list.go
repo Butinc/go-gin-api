@@ -1,7 +1,6 @@
 package department_handler
 
 import (
-	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/admin_repo"
 	"net/http"
 
 	"github.com/xinliangnote/go-gin-api/internal/api/service/department_service"
@@ -20,14 +19,14 @@ type listRequest struct {
 }
 
 type listData struct {
-	Id          int    `json:"id"`           // ID
-	HashID      string `json:"hashid"`       // hashid
-	Name        string `json:"name"`         // 名称
-	CreatedAt   string `json:"created_at"`   // 创建时间
-	CreatedUser string `json:"created_user"` // 创建人
-	UpdatedAt   string `json:"updated_at"`   // 更新时间
-	UpdatedUser string `json:"updated_user"` // 更新人
-	Admins      []admin_repo.Admin
+	Id          int      `json:"id"`           // ID
+	HashID      string   `json:"hashid"`       // hashid
+	Name        string   `json:"name"`         // 名称
+	CreatedAt   string   `json:"created_at"`   // 创建时间
+	CreatedUser string   `json:"created_user"` // 创建人
+	UpdatedAt   string   `json:"updated_at"`   // 更新时间
+	UpdatedUser string   `json:"updated_user"` // 更新人
+	Admins      []string `json:"admins"`       // 管理员
 }
 
 type listResponse struct {
@@ -122,7 +121,10 @@ func (h *handler) List() core.HandlerFunc {
 				CreatedUser: v.CreatedUser,
 				UpdatedAt:   v.UpdatedAt.Format(time_parse.CSTLayout),
 				UpdatedUser: v.UpdatedUser,
-				Admins:      v.Admins,
+			}
+
+			for _, admin := range v.Admins {
+				data.Admins = append(data.Admins, admin.Username)
 			}
 
 			res.List[k] = data

@@ -3,11 +3,10 @@
 //        ANY CHANGES DONE HERE WILL BE LOST             //
 ///////////////////////////////////////////////////////////
 
-package department_repo
+package admin_repo
 
 import (
 	"fmt"
-	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/related_repo"
 	"time"
 
 	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo"
@@ -16,11 +15,11 @@ import (
 	"gorm.io/gorm"
 )
 
-func NewModel() *Department {
+func NewDepartmentModel() *Department {
 	return new(Department)
 }
 
-func NewQueryBuilder() *departmentRepoQueryBuilder {
+func NewDepartmentQueryBuilder() *departmentRepoQueryBuilder {
 	return new(departmentRepoQueryBuilder)
 }
 
@@ -95,7 +94,7 @@ func (qb *departmentRepoQueryBuilder) First(db *gorm.DB) (*Department, error) {
 	return ret, res.Error
 }
 
-func (qb *departmentRepoQueryBuilder) QueryOne(db *gorm.DB) (*related_repo.DepartmentWithAdmins, error) {
+func (qb *departmentRepoQueryBuilder) QueryOne(db *gorm.DB) (*Department, error) {
 	qb.limit = 1
 	ret, err := qb.QueryAll(db)
 	if len(ret) > 0 {
@@ -104,8 +103,8 @@ func (qb *departmentRepoQueryBuilder) QueryOne(db *gorm.DB) (*related_repo.Depar
 	return nil, err
 }
 
-func (qb *departmentRepoQueryBuilder) QueryAll(db *gorm.DB) ([]*related_repo.DepartmentWithAdmins, error) {
-	var ret []*related_repo.DepartmentWithAdmins
+func (qb *departmentRepoQueryBuilder) QueryAll(db *gorm.DB) ([]*Department, error) {
+	var ret []*Department
 	err := qb.buildQuery(db).Find(&ret).Error
 	return ret, err
 }

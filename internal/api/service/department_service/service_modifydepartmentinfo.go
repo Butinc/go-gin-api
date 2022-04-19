@@ -2,7 +2,7 @@ package department_service
 
 import (
 	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo"
-	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/department_repo"
+	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/admin_repo"
 	"github.com/xinliangnote/go-gin-api/internal/pkg/core"
 )
 
@@ -16,7 +16,7 @@ func (s *service) ModifyDepartmentInfo(ctx core.Context, id int32, modifyData *M
 		"updated_user": ctx.UserName(),
 	}
 
-	qb := department_repo.NewQueryBuilder()
+	qb := admin_repo.NewDepartmentQueryBuilder()
 	qb.WhereId(db_repo.EqualPredicate, id)
 	err = qb.Updates(s.db.GetDbW().WithContext(ctx.RequestContext()), data)
 	if err != nil {

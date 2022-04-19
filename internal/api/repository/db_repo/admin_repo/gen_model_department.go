@@ -1,4 +1,4 @@
-package department_repo
+package admin_repo
 
 import (
 	"time"
@@ -14,5 +14,5 @@ type Department struct {
 	CreatedUser string    // 创建人
 	UpdatedAt   time.Time `gorm:"time"` // 更新时间
 	UpdatedUser string    // 更新人
-	//Admins      []admin_repo.Admin
+	Admins      []Admin
 }

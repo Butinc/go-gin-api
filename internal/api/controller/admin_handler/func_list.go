@@ -1,8 +1,6 @@
 package admin_handler
 
 import (
-	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/department_repo"
-	"github.com/xinliangnote/go-gin-api/internal/api/repository/db_repo/related_repo"
 	"net/http"
 
 	"github.com/xinliangnote/go-gin-api/configs"
@@ -25,18 +23,18 @@ type listRequest struct {
 }
 
 type listData struct {
-	Id          int                        `json:"id"`           // ID
-	HashID      string                     `json:"hashid"`       // hashid
-	Username    string                     `json:"username"`     // 用户名
-	Nickname    string                     `json:"nickname"`     // 昵称
-	Mobile      string                     `json:"mobile"`       // 手机号
-	IsUsed      int                        `json:"is_used"`      // 是否启用 1:是 -1:否
-	IsOnline    int                        `json:"is_online"`    // 是否在线 1:是 -1:否
-	CreatedAt   string                     `json:"created_at"`   // 创建时间
-	CreatedUser string                     `json:"created_user"` // 创建人
-	UpdatedAt   string                     `json:"updated_at"`   // 更新时间
-	UpdatedUser string                     `json:"updated_user"` // 更新人
-	Department  related_repo. `json:"department"`   // 部门
+	Id             int    `json:"id"`              // ID
+	HashID         string `json:"hashid"`          // hashid
+	Username       string `json:"username"`        // 用户名
+	Nickname       string `json:"nickname"`        // 昵称
+	Mobile         string `json:"mobile"`          // 手机号
+	IsUsed         int    `json:"is_used"`         // 是否启用 1:是 -1:否
+	IsOnline       int    `json:"is_online"`       // 是否在线 1:是 -1:否
+	CreatedAt      string `json:"created_at"`      // 创建时间
+	CreatedUser    string `json:"created_user"`    // 创建人
+	UpdatedAt      string `json:"updated_at"`      // 更新时间
+	UpdatedUser    string `json:"updated_user"`    // 更新人
+	DepartmentName string `json:"department_name"` // 部门
 }
 
 type listResponse struct {
@@ -133,18 +131,18 @@ func (h *handler) List() core.HandlerFunc {
 			}
 
 			data := listData{
-				Id:          cast.ToInt(v.Id),
-				HashID:      hashId,
-				Username:    v.Username,
-				Nickname:    v.Nickname,
-				Mobile:      v.Mobile,
-				IsUsed:      cast.ToInt(v.IsUsed),
-				IsOnline:    isOnline,
-				CreatedAt:   v.CreatedAt.Format(time_parse.CSTLayout),
-				CreatedUser: v.CreatedUser,
-				UpdatedAt:   v.UpdatedAt.Format(time_parse.CSTLayout),
-				UpdatedUser: v.UpdatedUser,
-				Department:  v.Department,
+				Id:             cast.ToInt(v.Id),
+				HashID:         hashId,
+				Username:       v.Username,
+				Nickname:       v.Nickname,
+				Mobile:         v.Mobile,
+				IsUsed:         cast.ToInt(v.IsUsed),
+				IsOnline:       isOnline,
+				CreatedAt:      v.CreatedAt.Format(time_parse.CSTLayout),
+				CreatedUser:    v.CreatedUser,
+				UpdatedAt:      v.UpdatedAt.Format(time_parse.CSTLayout),
+				UpdatedUser:    v.UpdatedUser,
+				DepartmentName: v.Department.Name,
 			}
 
 			res.List[k] = data
