@@ -9,6 +9,7 @@ import (
 	"github.com/spf13/viper"
 )
 
+// 使用 new 返回的是指向类型的指针
 var config = new(Config)
 
 type Config struct {
@@ -78,6 +79,7 @@ func init() {
 		panic(err)
 	}
 
+	// 传递给 unmarshal 的是只想 Config 类型的指针
 	if err := viper.Unmarshal(config); err != nil {
 		panic(err)
 	}
